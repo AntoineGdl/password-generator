@@ -6,6 +6,7 @@
 
 # Pour faire le choix des caractères aléatoirement
 import random as r
+
 # Création d'une liste pour les caractères de force 1
 lstNv1 = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p',
           'q','r','s','t','u','v','w','x','y','z']
@@ -17,6 +18,8 @@ lstMaj = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
 
 lstCarS = ['&','é','~','#','{','}','(','[','-','|','è','`','_','ç','^','à',
            '@','=','+','ù','%','*','£','$','!',':','?']
+
+
 def mdpNiv1(longueur: int) -> str:
     mdp = ""
     if longueur != 0:
@@ -34,36 +37,27 @@ def mdpNiv2(longueurMot:int, longueurChiffre:int)->str:
             mdpChiffres += r.choice(lstNb)
     return mdpMot + mdpChiffres
 
-def mdpNiv3(longueurMot:int, lettresMaj:int, lettresMin:int, nbChiffres:int)->str:
+def mdpNiv3(longueurMot:int, lettresMaj:int, nbChiffres:int)->str:
     mdpMot = mdpNiv1(longueurMot)
     mdpChiffres = ""
-    partieMin = ""
     partieNb = ""
     if lettresMaj != 0:
         lettresMaj -= 1
         for j in range(lettresMaj+1):
             mdpChiffres += r.choice(lstMaj)
 
-    if lettresMin != 0:
-        lettresMin -= 1
-        for j in range(lettresMin+1):
-            partieMin += r.choice(lstNv1)
-
     if nbChiffres != 0:
         nbChiffres -= 1
         for j in range(nbChiffres+1):
             partieNb += r.choice(lstNb[j])
 
-    return mdpMot + mdpChiffres + partieMin + partieNb
-# print(mdpNiv3(5,2,3,2))
+    return mdpMot + mdpChiffres + partieNb
 
-def mdpNiv4(longueurMot:int,lettresMaj:int,lettresMin:int,nbChiffres:int,longueurCarS:int)->str:
-    mdp = mdpNiv3(longueurMot,lettresMaj,lettresMin,nbChiffres)
+def mdpNiv4(longueurMot:int,lettresMaj:int,nbChiffres:int,longueurCarS:int)->str:
+    mdp = mdpNiv3(longueurMot,lettresMaj,nbChiffres)
     partieCarS = ""
     if longueurCarS != 0:
         longueurCarS -= 1
         for i in range(longueurCarS+1):
             partieCarS += r.choice(lstCarS)
     return mdp + partieCarS
-
-# print(mdpNiv4(5,2,2,2,2))
